@@ -16,7 +16,6 @@ class ClientServiceTest {
         val result = clientService.saveClient(client)
         assertNotNull(result)
     }
-
     @Test
     fun `fail save client - validation errors phone`() {
         var client = getClientFromJson("/fail/user_with_bad_phone1.json")

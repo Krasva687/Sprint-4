@@ -1,7 +1,7 @@
 abstract class Validator<T> {
     abstract fun validate(value: T?): List<ErrorCode>
 }
-
+//Валидация телефона на размер (не более 11), что имеются только цифры и начинается с 8 или 7
 class PhoneValidator : Validator<String>() {
     override fun validate(value: String?): List<ErrorCode> {
         if (value != null) {
@@ -14,7 +14,7 @@ class PhoneValidator : Validator<String>() {
         return listOf()
     }
 }
-
+//Валидация почты, чтоиспользуется только латиница, есть знак @ и домен с регионом через точку, а также размер не превышает 32
 class EmailValidator : Validator<String>(){
     override fun validate(value: String?): List<ErrorCode> {
         if (value != null) {
@@ -30,7 +30,7 @@ class EmailValidator : Validator<String>(){
     }
 
 }
-
+//Валидация имени, что используется только кириллица и размер не превышает 16
 class FirstNameValidator : Validator<String>(){
     override fun validate(value: String?): List<ErrorCode> {
         if (value != null){
@@ -44,7 +44,7 @@ class FirstNameValidator : Validator<String>(){
     }
 }
 
-
+//Валидация фамилии, что используется только кириллица и размер не превышает 16
 class LastNameValidator : Validator<String>(){
     override fun validate(value: String?): List<ErrorCode> {
         if (value != null){
@@ -57,11 +57,12 @@ class LastNameValidator : Validator<String>(){
         return listOf(ErrorCode.INVALID_LAST_NAME_CHARACTER)
     }
 }
-
+//Валидация СНИЛС, размер не должен быть больше 11, должны быть использованы лишь цифры, так же проверка контрольной суммы если код больше дефолтного значения 001-001-998
 class SnilsValidator : Validator<String>(){
     override fun validate(value: String?): List<ErrorCode> {
         if(value != null){
             if(value.matches("\\d+".toRegex()) && value.length == 11){
+                //Если код больше дефолтного значения, то суммируем произведение чисел с обратным индексом и проверяем с контрольной суммой
                 if(value.toLong() > 1001998) {
                     val snilsArr = value.toCharArray()
                     var snilsSum = 0
