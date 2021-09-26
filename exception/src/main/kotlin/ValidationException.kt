@@ -11,6 +11,7 @@ enum class ErrorCode(val code: Int, val msg: String) {
     INVALID_FIRST_NAME_CHARACTER(40, "Недопустимый формат имени, необходимо использовать только кириллицу"),
     INVALID_SNILS_LENGTH(30, "Недопустимая длинна СНИЛС, должно быть 11 цифр"),
     INVALID_SNILS_CHARACTER(20, "Недопустимый формат СНИЛС, необходимо использовать только цифры"),
-    INVALID_SNILS(10, "Некоректный СНИЛС")
-    // ...
+    INVALID_SNILS(10, "Некоректный СНИЛС"),
+    INVALID_FIRST_DIGIT_PHONE(5, "Неверная первая цифра в телефоне"),
+    EMPTY_INPUT(1, "Пустая строка")
 }

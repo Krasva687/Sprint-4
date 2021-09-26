@@ -16,6 +16,7 @@ class ClientServiceTest {
         val result = clientService.saveClient(client)
         assertNotNull(result)
     }
+
     @Test
     fun `fail save client - validation errors phone`() {
         var client = getClientFromJson("/fail/user_with_bad_phone1.json")
@@ -29,6 +30,12 @@ class ClientServiceTest {
             clientService.saveClient(client)
         }
         assertEquals(exception.errorCode[0], ErrorCode.INVALID_PHONE_SIZE)
+
+        client = getClientFromJson("/fail/user_with_bad_phone4.json")
+        exception = assertThrows<ValidationException>("Ожидаемая ошибка, пустая строка") {
+            clientService.saveClient(client)
+        }
+        assertEquals(exception.errorCode[0], ErrorCode.EMPTY_INPUT)
     }
 
     @Test
@@ -44,6 +51,12 @@ class ClientServiceTest {
             clientService.saveClient(client)
         }
         assertEquals(exception.errorCode[0], ErrorCode.INVALID_FIRST_NAME_LENGTH)
+
+        client = getClientFromJson("/fail/first_name_bad3.json")
+        exception = assertThrows<ValidationException>("Ожидаемая ошибка, пустая строка") {
+            clientService.saveClient(client)
+        }
+        assertEquals(exception.errorCode[0], ErrorCode.EMPTY_INPUT)
     }
 
     @Test
@@ -59,6 +72,12 @@ class ClientServiceTest {
             clientService.saveClient(client)
         }
         assertEquals(exception.errorCode[0], ErrorCode.INVALID_LAST_NAME_LENGTH)
+
+        client = getClientFromJson("/fail/last_name_bad3.json")
+        exception = assertThrows<ValidationException>("Ожидаемая ошибка, пустая строка") {
+            clientService.saveClient(client)
+        }
+        assertEquals(exception.errorCode[0], ErrorCode.EMPTY_INPUT)
     }
 
     @Test
@@ -74,6 +93,12 @@ class ClientServiceTest {
             clientService.saveClient(client)
         }
         assertEquals(exception.errorCode[0], ErrorCode.INVALID_MAIL_LENGTH)
+
+        client = getClientFromJson("/fail/email_bad3.json")
+        exception = assertThrows<ValidationException>("Ожидаемая ошибка, пустая строка") {
+            clientService.saveClient(client)
+        }
+        assertEquals(exception.errorCode[0], ErrorCode.EMPTY_INPUT)
     }
 
     @Test
@@ -96,6 +121,12 @@ class ClientServiceTest {
             clientService.saveClient(client)
         }
         assertEquals(exception.errorCode[0], ErrorCode.INVALID_SNILS)
+
+        client = getClientFromJson("/fail/snils_bad4.json")
+        exception = assertThrows<ValidationException>("Ожидаемая ошибка, пустая строка") {
+            clientService.saveClient(client)
+        }
+        assertEquals(exception.errorCode[0], ErrorCode.EMPTY_INPUT)
     }
 
 
